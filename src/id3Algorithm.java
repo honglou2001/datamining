@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+ï»¿import java.util.ArrayList;
 import java.util.Hashtable;
 
 
@@ -11,79 +11,110 @@ public class id3Algorithm {
 	private static Hashtable<String, String[]> catetoryVal = new  Hashtable<String, String[]>();
     
 	private static  String[][] data = {
-    		{"¿ªĞÄ","¿ªĞÄ","ÇçÀÊ","Í¨³©","ÊÇ"},
-    		{"¿ªĞÄ","¿ªĞÄ","Òõ°µ","Óµ¶Â","ÊÇ"},
-    		{"¿ªĞÄ","¿ªĞÄ","Òõ°µ","Í¨³©","ÊÇ"},
-    		{"¿ªĞÄ","¿ªĞÄ","ÏÂÓê","Í¨³©","ÊÇ"},
-    		{"¿ªĞÄ","²»¿ªĞÄ","ÇçÀÊ","Í¨³©","·ñ"},
-    		{"¿ªĞÄ","²»¿ªĞÄ","Òõ°µ","Í¨³©","·ñ"},
-    		{"¿ªĞÄ","²»¿ªĞÄ","ÏÂÓê","Í¨³©","·ñ"},
-    		{"¿ªĞÄ","²»¿ªĞÄ","ÇçÀÊ","Óµ¶Â","ÊÇ"},
-    		{"¿ªĞÄ","²»¿ªĞÄ","ÏÂÓê","Óµ¶Â","·ñ"},
-    		{"¿ªĞÄ","²»¿ªĞÄ","Òõ°µ","Óµ¶Â","·ñ"},
-    		{"Ò»°ã","¿ªĞÄ","ÇçÀÊ","Í¨³©","ÊÇ"},
-    		{"Ò»°ã","²»¿ªĞÄ","ÇçÀÊ","Í¨³©","ÊÇ"},
-    		{"Ò»°ã","²»¿ªĞÄ","ÇçÀÊ","Óµ¶Â","ÊÇ"},
-    		{"Ò»°ã","²»¿ªĞÄ","Òõ°µ","Í¨³©","ÊÇ"},
-    		{"Ò»°ã","²»¿ªĞÄ","Òõ°µ","Óµ¶Â","·ñ"},
-    		{"Ò»°ã","²»¿ªĞÄ","ÏÂÓê","Í¨³©","·ñ"},
-    		{"Ò»°ã","²»¿ªĞÄ","ÏÂÓê","Óµ¶Â","·ñ"},
-    		{"²»¿ªĞÄ","²»¿ªĞÄ","ÇçÀÊ","Í¨³©","ÊÇ"},
-    		{"²»¿ªĞÄ","²»¿ªĞÄ","ÇçÀÊ","Óµ¶Â","·ñ"},
-    		{"²»¿ªĞÄ","²»¿ªĞÄ","Òõ°µ","Í¨³©","ÊÇ"},
-    		{"²»¿ªĞÄ","²»¿ªĞÄ","Òõ°µ","Óµ¶Â","·ñ"},
-    		{"²»¿ªĞÄ","²»¿ªĞÄ","ÏÂÓê","Í¨³©","·ñ"},
-    		{"²»¿ªĞÄ","²»¿ªĞÄ","ÏÂÓê","Óµ¶Â","·ñ"}
+    		{"å¼€å¿ƒ","å¼€å¿ƒ","æ™´æœ—","é€šç•…","æ˜¯"},
+    		{"å¼€å¿ƒ","å¼€å¿ƒ","é˜´æš—","æ‹¥å µ","æ˜¯"},
+    		{"å¼€å¿ƒ","å¼€å¿ƒ","é˜´æš—","é€šç•…","æ˜¯"},
+    		{"å¼€å¿ƒ","å¼€å¿ƒ","ä¸‹é›¨","é€šç•…","æ˜¯"},
+    		{"å¼€å¿ƒ","å¼€å¿ƒ","ä¸‹é›¨","æ‹¥å µ","å¦"},
+    		{"å¼€å¿ƒ","ä¸å¼€å¿ƒ","æ™´æœ—","é€šç•…","å¦"},
+    		{"å¼€å¿ƒ","ä¸å¼€å¿ƒ","é˜´æš—","é€šç•…","å¦"},
+    		{"å¼€å¿ƒ","ä¸å¼€å¿ƒ","ä¸‹é›¨","é€šç•…","å¦"},
+    		{"å¼€å¿ƒ","ä¸å¼€å¿ƒ","æ™´æœ—","æ‹¥å µ","æ˜¯"},
+    		{"å¼€å¿ƒ","ä¸å¼€å¿ƒ","ä¸‹é›¨","æ‹¥å µ","å¦"},
+    		{"å¼€å¿ƒ","ä¸å¼€å¿ƒ","é˜´æš—","æ‹¥å µ","å¦"},
+    		{"ä¸€èˆ¬","å¼€å¿ƒ","æ™´æœ—","é€šç•…","æ˜¯"},
+    		{"ä¸€èˆ¬","ä¸å¼€å¿ƒ","æ™´æœ—","é€šç•…","æ˜¯"},
+    		{"ä¸€èˆ¬","ä¸å¼€å¿ƒ","æ™´æœ—","æ‹¥å µ","æ˜¯"},
+    		{"ä¸€èˆ¬","ä¸å¼€å¿ƒ","é˜´æš—","é€šç•…","æ˜¯"},
+    		{"ä¸€èˆ¬","ä¸å¼€å¿ƒ","é˜´æš—","æ‹¥å µ","å¦"},
+    		{"ä¸€èˆ¬","ä¸å¼€å¿ƒ","ä¸‹é›¨","é€šç•…","å¦"},
+    		{"ä¸€èˆ¬","ä¸å¼€å¿ƒ","ä¸‹é›¨","æ‹¥å µ","å¦"},
+    		{"ä¸å¼€å¿ƒ","ä¸å¼€å¿ƒ","æ™´æœ—","é€šç•…","æ˜¯"},
+    		{"ä¸å¼€å¿ƒ","ä¸å¼€å¿ƒ","æ™´æœ—","æ‹¥å µ","å¦"},
+    		{"ä¸å¼€å¿ƒ","ä¸å¼€å¿ƒ","é˜´æš—","é€šç•…","æ˜¯"},
+    		{"ä¸å¼€å¿ƒ","ä¸å¼€å¿ƒ","é˜´æš—","æ‹¥å µ","å¦"},
+    		{"ä¸å¼€å¿ƒ","ä¸å¼€å¿ƒ","ä¸‹é›¨","é€šç•…","å¦"},
+    		{"ä¸å¼€å¿ƒ","ä¸å¼€å¿ƒ","ä¸‹é›¨","æ‹¥å µ","å¦"}
     		
     };	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub				       
+		// TODO Auto-generated method stub	
+		
 		InitialHashtable();
-		double allEntropy = calculateAllEntropy();
 		
-		double[] valGain = new double[4];
+		int maxGainIndex = CalculateMaxGain(-1,"");		
 		
-		valGain[0] = calculateAttributeGain("Babymood",allEntropy);
-		valGain[1] = calculateAttributeGain("Mothermood",allEntropy);
-		valGain[2] = calculateAttributeGain("Weather",allEntropy);
-		valGain[3]= calculateAttributeGain("Traffic",allEntropy);
+		String[] val = catetoryVal.get(categories[maxGainIndex]);
 		
-		double val = 0;
-		int index = -1;
-		for(int i=0;i<valGain.length;i++)
+		for(int i = 0 ;i<val.length;i++)
 		{
-			if(val<valGain[i])
-			{
-				val = valGain[i];
-				index = i;
-			}
+			 CalculateMaxGain(maxGainIndex,val[i]);		
 		}
-		
-		System.out.println(String.format("×î´óÔöÒæÎª%1$s",categories[index]));
-		
 	}
 	
 	private static void InitialHashtable()
 	{
-		String[] attribute0 = {"¿ªĞÄ","Ò»°ã","²»¿ªĞÄ"};
+		String[] attribute0 = {"å¼€å¿ƒ","ä¸€èˆ¬","ä¸å¼€å¿ƒ"};
 		catetoryVal.put(categories[0], attribute0);
 		
-		String[] attribute1 = {"¿ªĞÄ","Ò»°ã","²»¿ªĞÄ"};
+		String[] attribute1 = {"å¼€å¿ƒ","ä¸€èˆ¬","ä¸å¼€å¿ƒ"};
 		catetoryVal.put(categories[1], attribute1);
 		
-		String[] attribute2 = {"ÇçÀÊ","Òõ°µ","ÏÂÓê"};
+		String[] attribute2 = {"æ™´æœ—","é˜´æš—","ä¸‹é›¨"};
 		catetoryVal.put(categories[2], attribute2);
 		
-		String[] attribute3 = {"Í¨³©","Óµ¶Â"};
+		String[] attribute3 = {"é€šç•…","æ‹¥å µ"};
 		catetoryVal.put(categories[3], attribute3);
 		
 	}
 	
-	//¼ÆËãĞÅÏ¢ÔöÒæ
-	private static double calculateAttributeGain(String skey,double allEntropy)
+	private static int CalculateMaxGain(int attrIndex,String attrVal)
+	{
+		double allEntropy = calculateAllEntropy(attrIndex,attrVal);
+		
+		double[] valGain = new double[4];
+		
+		valGain[0] = calculateAttributeGain("Babymood",allEntropy,attrIndex,attrVal);
+		valGain[1] = calculateAttributeGain("Mothermood",allEntropy,attrIndex,attrVal);
+		
+		if(attrIndex==-1){			
+			valGain[2] = calculateAttributeGain("Weather",allEntropy,attrIndex,attrVal);
+		}
+		valGain[3]= calculateAttributeGain("Traffic",allEntropy,attrIndex,attrVal);
+		
+		double val = -10000000D;
+		int index = -1;
+		for(int i=0;i<valGain.length;i++)
+		{
+			if(attrIndex==2 && i==2)
+			{
+				continue;
+			}
+			
+			if(val<valGain[i])
+			{							
+				val = valGain[i];							
+				index = i;					
+			}
+		}
+		
+		try{
+		 System.out.println(String.format("æœ€å¤§å¢ç›Šä¸º%1$s",attrVal+" "+categories[index]));
+		}
+		catch(Exception ex)
+		{
+			System.out.println(String.format("!!!!!---æœ€å¤§å¢ç›Šä¸º%1$s",attrVal));
+			
+		}
+		
+		return index;
+	}
+		
+	//è®¡ç®—ä¿¡æ¯å¢ç›Š
+	private static double calculateAttributeGain(String skey,double allEntropy,int attrIndex,String attrVal)
 	{
 		int count= data.length;
 		
@@ -93,26 +124,41 @@ public class id3Algorithm {
 		String[] val = catetoryVal.get(skey);
 		for(int i = 0 ;i<val.length;i++)
 		{
-			EntropyVal = calculateAttributeEntropy(skey,val[i]);
+			EntropyVal = calculateAttributeEntropy(skey,val[i],attrIndex,attrVal);
 		}
-		allPlus += EntropyVal[0]/count*EntropyVal[1];
+		
+		if(EntropyVal[1]==0){
+		
+		}
+		else{
+		   allPlus += EntropyVal[0]/count*EntropyVal[1];
+		}
 
 
 	    double gain = allEntropy - allPlus;
 	    
-	    System.out.println(String.format("%1$s,ĞÅÏ¢ÔöÒæÎª%2$f",skey,gain));
+	    System.out.println(String.format("%1$s,ä¿¡æ¯å¢ç›Šä¸º%2$f",skey+"("+attrVal+")",gain));
 	    
 	    return gain;
 	}
 	
-	// double[0]Îªcount£¬  double[1]ÎªĞÅÏ¢ìØ
-	private static double[] calculateAttributeEntropy(String skey,String attribute)
+	// double[0]ä¸ºcountï¼Œ  double[1]ä¸ºä¿¡æ¯ç†µ
+	private static double[] calculateAttributeEntropy(String skey,String attribute,int attrIndex,String attrVal)
 	{			                      
-        double[] outpercent = calculateAttributeProbability(skey,attribute,"ÊÇ");
-        double[] nooutpercent = calculateAttributeProbability(skey,attribute,"·ñ");
-        double entropy = -outpercent[1]*Math.log(outpercent[1]) - nooutpercent[1]*Math.log(nooutpercent[1]);  //-5/14log(5/14) - 9/14log(9/14) = 0.940
+        double[] outpercent = calculateAttributeProbability(skey,attribute,"æ˜¯",attrIndex,attrVal);
+        double[] nooutpercent = calculateAttributeProbability(skey,attribute,"å¦",attrIndex,attrVal);
+        double entropy = 0D;
+        
+        if ( outpercent[1]==0 || nooutpercent[1]==0)
+        {
+        	
+        }
+        else
+        {
+        	entropy =	-outpercent[1]*Math.log(outpercent[1]) - nooutpercent[1]*Math.log(nooutpercent[1]);  
+        }
               
-        System.out.println(String.format("%1$s,È¥ÍæµÄ¸ÅÂÊÊÇ:%2$f£¬²»³öÈ¥ÍæµÄ¸ÅÂÊÊÇ:%3$f,ĞÅÏ¢ìØ:%4$f",skey+"¡ª¡ª"+attribute,outpercent[1],nooutpercent[1],entropy));
+        System.out.println(String.format("%1$s,å»ç©çš„æ¦‚ç‡æ˜¯:%2$fï¼Œä¸å‡ºå»ç©çš„æ¦‚ç‡æ˜¯:%3$f,ä¿¡æ¯ç†µ:%4$f",skey+"â€”â€”"+attribute+"("+attrVal+")",outpercent[1],nooutpercent[1],entropy));
         
         double[] returnval = new double[2];
         returnval[0] = outpercent[0];
@@ -121,7 +167,8 @@ public class id3Algorithm {
         return returnval;        
 	}
 	
-	private static double[] calculateAttributeProbability(String skey,String attribute,String action)
+	
+	private static double[] calculateAttributeProbability(String skey,String attribute,String action,int attrIndex,String attrVal)
 	{
 		double[] returnval = new double[2];
 		int index = 0;		
@@ -136,45 +183,75 @@ public class id3Algorithm {
 		
         int count = 0;
         
-		for(int j=0;j<data.length;j++)
-		{
-			if(data[j][index] == attribute)
-        	{
-				count = count+1;
-        	}  			
-		}
-		
+        //int attCount = 0;
+        //å¦‚ä¸æ˜¯å…¨é›†åˆ
+        if(attrIndex!=-1)
+        {
+			for(int j=0;j<data.length;j++)
+			{
+				if(data[j][index] == attribute&&data[j][attrIndex] == attrVal)
+	        	{
+					count = count+1;
+	        	}  			
+			}	        	
+        }
+        else{
+			for(int j=0;j<data.length;j++)
+			{
+				if(data[j][index] == attribute)
+	        	{
+					count = count+1;
+	        	}  			
+			}	
+        }
         int attributeCount = 0;
         
-        for(int i=0;i<data.length;i++)
+        //å¦‚ä¸æ˜¯å…¨é›†åˆ
+        if(attrIndex!=-1)
         {
-        	if(data[i][index] == attribute && data[i][4] == action)
-        	{
-        		attributeCount = attributeCount+1;
-        	}       	    	
+	        for(int i=0;i<data.length;i++)
+	        {
+	        	if(data[i][index] == attribute && data[i][4] == action && data[i][attrIndex] == attrVal)
+	        	{
+	        		attributeCount = attributeCount+1;
+	        	}       	    	
+	        }
+	        
+	        
+        }else{
+	        for(int i=0;i<data.length;i++)
+	        {
+	        	if(data[i][index] == attribute && data[i][4] == action)
+	        	{
+	        		attributeCount = attributeCount+1;
+	        	}       	    	
+	        }
         }
         
-        double attributePercent = attributeCount*1.0/count;   
+        double attributePercent = 0;  
+        if(count !=0){
+          attributePercent = attributeCount*1.0/count; 
+        }
         returnval[0] = count;
         returnval[1] = attributePercent;
         return returnval;    		
 	}
 	
 	
-	//Ñù±¾¼¯ºÏµÄĞÅÏ¢ìØ
-	private static double calculateAllEntropy()
+	//æ ·æœ¬é›†åˆçš„ä¿¡æ¯ç†µ
+	private static double calculateAllEntropy(int attrIndex,String attrVal)
 	{			                      
-        double outpercent = calculateAllProbability("Outings","ÊÇ");
-        double nooutpercent = calculateAllProbability("Outings","·ñ");
+        double outpercent = calculateAllProbability("Outings","æ˜¯",attrIndex,attrVal);
+        double nooutpercent = calculateAllProbability("Outings","å¦",attrIndex,attrVal);
         double entropy = -outpercent*Math.log(outpercent) - nooutpercent*Math.log(nooutpercent);  //-5/14log(5/14) - 9/14log(9/14) = 0.940
               
-        System.out.println(String.format("×ÜÑù±¾¼¯ºÏ³öÈ¥ÍæµÄ¸ÅÂÊÊÇ:%1$f£¬²»³öÈ¥ÍæµÄ¸ÅÂÊÊÇ:%2$f,£¬Ñù±¾¼¯ºÏµÄĞÅÏ¢ìØ:%3$f",outpercent,nooutpercent,entropy));
+        System.out.println(String.format("%1$sæ€»æ ·æœ¬é›†åˆå‡ºå»ç©çš„æ¦‚ç‡æ˜¯:%2$fï¼Œä¸å‡ºå»ç©çš„æ¦‚ç‡æ˜¯:%3$f,ï¼Œæ ·æœ¬é›†åˆçš„ä¿¡æ¯ç†µ:%4$f",attrVal,outpercent,nooutpercent,entropy));
         
         return entropy;        
 	}	
 	
-	
-	private static double calculateAllProbability(String skey,String attribute)
+	//ç›®æ ‡å±æ€§åœ¨æŸæ ·æœ¬é›†åˆçš„å‘ç”Ÿçš„æ¦‚ç‡,attrIndex=-1ä¸ºå…¨é›†åˆ
+	private static double calculateAllProbability(String skey,String attribute,int attrIndex,String attrVal)
 	{
 		int index = 0;		
 		for(int j=0;j<categories.length;j++)
@@ -186,14 +263,44 @@ public class id3Algorithm {
 			}			
 		}
         int count = data.length;
+        
+        int attCount = 0;
+        //å¦‚ä¸æ˜¯å…¨é›†åˆ
+        if(attrIndex!=-1)
+        {
+            for(int i=0;i<count;i++)
+            {
+            	if(data[i][attrIndex] == attrVal )
+            	{
+            		attCount = attCount+1;
+            	}       	    	
+            }
+        }
+        
         int attributeCount = 0;
         
-        for(int i=0;i<count;i++)
+        //å¦‚ä¸æ˜¯å…¨é›†åˆ
+        if(attrIndex!=-1)
         {
-        	if(data[i][index] == attribute)
-        	{
-        		attributeCount = attributeCount+1;
-        	}       	    	
+	        for(int i=0;i<count;i++)
+	        {
+	        	if(data[i][index] == attribute && data[i][attrIndex] == attrVal)
+	        	{
+	        		attributeCount = attributeCount+1;
+	        	}       	    	
+	        }   
+	        
+	        count = attCount;
+        
+        }
+        else{
+	        for(int i=0;i<count;i++)
+	        {
+	        	if(data[i][index] == attribute)
+	        	{
+	        		attributeCount = attributeCount+1;
+	        	}       	    	
+	        }
         }
         
         double attributePercent = attributeCount*1.0/count;                

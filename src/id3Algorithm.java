@@ -2,6 +2,7 @@
 import java.util.Hashtable;
 
 
+
 public class id3Algorithm {
 
 	private static double threshold = 0.6D;
@@ -9,6 +10,8 @@ public class id3Algorithm {
 	private static String[] categories = {"Babymood","Mothermood","Weather","Traffic","Outings"};
 	
 	private static Hashtable<String, String[]> catetoryVal = new  Hashtable<String, String[]>();
+	
+	private static ArrayList<id3data> allistdata = new ArrayList<id3data>();; // 原始数据 
     
 	private static  String[][] data = {
     		{"开心","开心","晴朗","通畅","是"},
@@ -45,6 +48,8 @@ public class id3Algorithm {
 		
 		InitialHashtable();
 		
+		Initialallistdata();
+		
 		int maxGainIndex = CalculateMaxGain(-1,"");		
 		
 		String[] val = catetoryVal.get(categories[maxGainIndex]);
@@ -55,9 +60,23 @@ public class id3Algorithm {
 		}
 	}
 	
+	
+	private static void Initialallistdata()
+	{		
+		for(int i = 0;i<data.length;i++)
+		{
+			id3data iddata = new id3data();
+			iddata.setArrdata(data[i]);
+			//1|2|4|8 =15
+			iddata.setValid(15);
+			allistdata.add(iddata);
+		}
+		
+	}
+	
 	private static void InitialHashtable()
 	{
-		String[] attribute0 = {"开心","一般","不开心"};
+		String[] attribute0 = {"开心","一般","不开心"}; 
 		catetoryVal.put(categories[0], attribute0);
 		
 		String[] attribute1 = {"开心","一般","不开心"};
@@ -85,7 +104,7 @@ public class id3Algorithm {
 		}
 		valGain[3]= calculateAttributeGain("Traffic",allEntropy,attrIndex,attrVal);
 		
-		double val = -10000000D;
+		double val = 0;
 		int index = -1;
 		for(int i=0;i<valGain.length;i++)
 		{
@@ -106,7 +125,7 @@ public class id3Algorithm {
 		}
 		catch(Exception ex)
 		{
-			System.out.println(String.format("!!!!!---最大增益为%1$s",attrVal));
+			System.out.println(String.format("Err!!!!!---最大增益为%1$s",attrVal));
 			
 		}
 		
@@ -307,3 +326,4 @@ public class id3Algorithm {
         return attributePercent;    		
 	}		
 }
+

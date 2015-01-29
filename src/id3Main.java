@@ -9,6 +9,8 @@ public class id3Main {
 	private static  String[][] data = {
 		{"开心1","开心","晴朗","通畅","是"},
 		{"开心1","一般","晴朗","通畅","是"},
+		{"开心1","一般","晴朗","拥堵","否"},
+		{"开心1","一般","阴暗","拥堵","否"},
 		{"开心1","开心","晴朗","拥堵","否"},
 		{"开心1","开心","阴暗","拥堵","是"},
 		{"开心1","开心","阴暗","通畅","是"},
@@ -32,7 +34,10 @@ public class id3Main {
 		{"不开心1","不开心","阴暗","通畅","是"},
 		{"不开心1","不开心","阴暗","拥堵","否"},
 		{"不开心1","不开心","下雨","通畅","否"},
-		{"不开心1","不开心","下雨","拥堵","否"}
+		{"不开心1","不开心","下雨","拥堵","否"},
+		{"不开心1","一般","晴朗","通畅","是"},
+		{"不开心1","一般","下雨","通畅","否"},
+		{"不开心1","一般","阴暗","通畅","否"}
 		
 	};	
 	
@@ -43,6 +48,8 @@ public class id3Main {
 	//private static Hashtable<String, ArrayList<id3Attribute>> catetoryVal = new  Hashtable<String, ArrayList<id3Attribute>>();
 	
 	private static ArrayList<id3Attribute> allcatetoryVal = new  ArrayList<id3Attribute>();
+	
+	private static id3tree rootTree = null;
 
 	/**
 	 * @param args
@@ -54,18 +61,115 @@ public class id3Main {
 		
 		Initialallistdata();
 		
+		id3Attribute attribute = null;//new id3Attribute();
 		
-		double[] dval = calculateAllEntropy((long)Math.pow(2, 0));
+		double maxIndex = calMaxGain();
 		
-		ArrayList<double[]> listLong= new ArrayList<double[]>();		
+		 rootTree = new id3tree(0, categories[(int)maxIndex]);
+		 
+//		 id3tree f1 = null;
+//		 f1 = new id3tree(1, "晴朗");
+//		 rootTree.addChild(f1);
+//		 f1 = new id3tree(2, "阴暗");
+//		 rootTree.addChild(f1);
+//		 f1 = new id3tree(3, "下雨");
+//		 rootTree.addChild(f1);
+		 
+		 
+
 		
-		listLong.add(calculateAttributeGain((long)Math.pow(2, 0),dval[0]));
+		for(int i=1;i<=3;i++){
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[2]+"("+i+"信息熵)");
+			attribute.setAttributeFigure((long)Math.pow(2, 20+i));
+			attribute.setAttributeParentFigure(0);
+			
+			double[] dval1 = calculateAllEntropy(attribute);
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[2]+"("+i+")"+"babymood");
+			attribute.setAttributeFigure((long)Math.pow(2, 20+i));		
+			attribute.setCategory(0);
+			attribute.setAttributeParentFigure((long)Math.pow(2, 20+i)| (long)Math.pow(2, 20));
+			calculateAttributeGain(attribute,dval1[0]);
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[2]+"("+i+")"+"mothermood");
+			attribute.setAttributeFigure((long)Math.pow(2, 20+i));		
+			attribute.setCategory(1);
+			attribute.setAttributeParentFigure((long)Math.pow(2, 20+i)| (long)Math.pow(2, 20));
+			calculateAttributeGain(attribute,dval1[0]);
+			
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[2]+"("+i+")"+"traffic");
+			attribute.setAttributeFigure((long)Math.pow(2, 20+i));		
+			attribute.setCategory(3);
+			attribute.setAttributeParentFigure((long)Math.pow(2, 20+i)| (long)Math.pow(2, 20));
+			calculateAttributeGain(attribute,dval1[0]);
+		}
 		
-		listLong.add(calculateAttributeGain((long)Math.pow(2, 10),dval[0]));
+		
+//		attribute =new id3Attribute();
+//		attribute.setAttributeContent(categories[2]+"晴朗111");
+//		attribute.setAttributeFigure((long)Math.pow(2, 22));
+//		attribute.setAttributeParentFigure((long)Math.pow(2, 22)|(long)Math.pow(2, 20));
+//		attribute.setCategory(1);		
+//		calculateAttributeGain(attribute,dval1[0]);
+		
+//		attribute =new id3Attribute();
+//		attribute.setAttributeContent(categories[2]+"晴朗11");
+//		attribute.setAttributeFigure((long)Math.pow(2, 21)|(long)Math.pow(2, 1));
+//		attribute.setAttributeParentFigure(0);
+//		 calculateAllEntropy(attribute);
+		 
+
+		
+        System.out.println("OK1");
+        		
+	}
 	
-		listLong.add(calculateAttributeGain((long)Math.pow(2, 20),dval[0]));
+	private static double calMaxGain()
+	{
+		id3Attribute attribute = null;//new id3Attribute();
 		
-		listLong.add(calculateAttributeGain((long)Math.pow(2, 30),dval[0]));
+		attribute =new id3Attribute();
+		attribute.setAttributeContent("根目录");
+		attribute.setAttributeFigure((long)Math.pow(2, 0));
+		attribute.setAttributeParentFigure(0);
+		
+		double[] dval = calculateAllEntropy(attribute);
+		
+		ArrayList<double[]> listLong= new ArrayList<double[]>();
+		
+		attribute =new id3Attribute();
+		attribute.setAttributeContent(categories[0]);
+		attribute.setAttributeFigure((long)Math.pow(2, 0));
+		attribute.setAttributeParentFigure(0);
+		
+		listLong.add(calculateAttributeGain(attribute,dval[0]));
+		
+		attribute =new id3Attribute();
+		attribute.setAttributeContent(categories[1]);
+		attribute.setAttributeFigure((long)Math.pow(2, 10));
+		attribute.setAttributeParentFigure(0);
+		
+		listLong.add(calculateAttributeGain(attribute,dval[0]));
+		
+		attribute =new id3Attribute();
+		attribute.setAttributeContent(categories[2]);
+		attribute.setAttributeFigure((long)Math.pow(2, 20));
+		attribute.setAttributeParentFigure(0);
+	
+		listLong.add(calculateAttributeGain(attribute,dval[0]));
+		
+		attribute =new id3Attribute();
+		attribute.setAttributeContent(categories[3]);
+		attribute.setAttributeFigure((long)Math.pow(2, 30));
+		attribute.setAttributeParentFigure(0);
+		
+		listLong.add(calculateAttributeGain(attribute,dval[0]));
 		
 		double maxIndex = 0;
 		double maxGain = 0;
@@ -85,42 +189,9 @@ public class id3Main {
 		catch(Exception ex){
 			System.out.println(String.format("Err!!!!!---最大增益为%1$s",maxGain));			
 		}
-//		calculateAllEntropy((long)Math.pow(2, 1) | (long)Math.pow(2, 11) | (long)Math.pow(2, 21));
-	
-//		calculateAllEntropy((long)Math.pow(2, 1));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 2));
-////		
-//		calculateAllEntropy((long)Math.pow(2, 3));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 11));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 12));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 13));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 21));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 22));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 23));
 		
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 0));
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 1));
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 2));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 11));
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 12));
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 13));
-//		
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 31));
-//		calculateAllEntropy((long)Math.pow(2, 21)|(long)Math.pow(2, 32));
-
-		
-        System.out.println("OK1");
-        		
+		return maxIndex;
 	}
-	
 	
 	private static void Initialallistdata()
 	{		
@@ -229,79 +300,87 @@ public class id3Main {
 				
 	}
 
-	
-	private static ArrayList<id3Attribute> GetList(long parent)
-	{
-		//parent = (long)Math.pow(2, parent*10);
+	//获取某个类别下的所有属性
+	private static ArrayList<id3Attribute> GetList(id3Attribute attribute)
+	{		
+		long figure = attribute.getAttributeFigure();
+		
+		long parent = attribute.getAttributeParentFigure();
 		
 		ArrayList<id3Attribute> listLong= new ArrayList<id3Attribute>();	
 		
-		for(int i=0;i<allcatetoryVal.size();i++)
-		{
-			id3Attribute id3att = allcatetoryVal.get(i);
-			if((id3att.getAttributeFigure() & parent) == parent)
+		if(parent == 0){		
+			for(int i=0;i<allcatetoryVal.size();i++)
 			{
-				listLong.add(id3att);
+				id3Attribute id3att = allcatetoryVal.get(i);
+				
+				if((id3att.getAttributeFigure() & figure) == figure)
+				{
+					listLong.add(id3att);
+				}			
 			}
+		}
+		else if(((long)Math.pow(2, 20) & parent) == (long)Math.pow(2, 20)){
 			
-		}		
+			for(int i=0;i<allcatetoryVal.size();i++)
+			{						
+				id3Attribute id3att = allcatetoryVal.get(i);
+				
+				id3Attribute id3att1= new id3Attribute();
+				
+				id3att1.setAttributeContent(id3att.getAttributeContent());
+				id3att1.setAttributeFigure(id3att.getAttributeFigure());
+				id3att1.setAttributeParentFigure(id3att.getAttributeParentFigure());
+				id3att1.setCategory(id3att.getCategory());
+				
+				if(id3att.getAttributeParentFigure() != attribute.getCategory())
+					continue;
+				
+//				if((id3att.getAttributeFigure() & (long)Math.pow(2, 20)) != (long)Math.pow(2, 20))
+//				{
+				id3att1.setAttributeFigure(id3att.getAttributeFigure() | parent);
+					
+					listLong.add(id3att1);
+//				}			
+			}
+		}
 		return listLong;
 	}
 	
-	//计算信息增益
-	private static double[] calculateAttributeGain(long infigure,double allEntropy)
+	//计算在某个集合下的某个类别的信息增益，0 为全体集合，Math.pow(2, 1) 为天气晴朗下的集合，
+	//Math.pow(2, 1) | Math.pow(2, 11) 为天气晴朗及babymood下的集合
+	private static double[] calculateAttributeGain(id3Attribute attribute,double allEntropy)
 	{
-		int count= data.length;
+		int count= data.length; //整个集合的记录数
+		
+		int attcount = 0;
+		
+		if(((long)Math.pow(2, 20) & attribute.getAttributeParentFigure()) == (long)Math.pow(2, 20)){
+			
+		       for(int i = 0;i < count; i ++){
+
+		              id3data idata = allistdata.get(i);
+		              
+		              long val = idata.getValid() & attribute.getAttributeFigure();
+		              
+		              if(val == attribute.getAttributeFigure()){		            	  
+			              
+			              attcount = attcount+1;			              
+		              }		         	  
+		          } 
+		       count = attcount ;
+		}
 		
 		double[] EntropyVal = null;
 		double allPlus = 0;
 		
-		
-//		Map<Long,ArrayList<Long>> attrHs =new HashMap<Long,ArrayList<Long>>();
-//				
-//		if(attrHs.containsKey((long)Math.pow(2, 0)))
-//		{
-//			ArrayList<Long> listLong= attrHs.get((long)Math.pow(2, 0));
-//			listLong.add((long)Math.pow(2, 1));
-//			
-//		}else
-//		{
-//			ArrayList<Long> listLong=  new ArrayList<Long>(); 
-//			listLong.add((long)Math.pow(2, 1));
-//			attrHs.put((long)Math.pow(2, 0), listLong);
-//		}
-		
-		ArrayList<id3Attribute> listLong= GetList(infigure);//new ArrayList<Long>();		
-		
-//		if(infigure == 0)
-//		{
-//			listLong.add((long)Math.pow(2, 1));
-//			listLong.add((long)Math.pow(2, 2));
-//			listLong.add((long)Math.pow(2, 3));		
-//		}
-//		else if(infigure == 1)
-//		{
-//			listLong.add((long)Math.pow(2, 11));
-//			listLong.add((long)Math.pow(2, 12));
-//			listLong.add((long)Math.pow(2, 13));			
-//		}	
-//		else if(infigure ==2)
-//		{
-//			listLong.add((long)Math.pow(2, 21));
-//			listLong.add((long)Math.pow(2, 22));
-//			listLong.add((long)Math.pow(2, 23));			
-//		}	
-//		else if(infigure ==3)
-//		{
-//			listLong.add((long)Math.pow(2, 31));
-//			listLong.add((long)Math.pow(2, 32));			
-//		}
+		ArrayList<id3Attribute> listLong= GetList(attribute);//new ArrayList<Long>();		
 
 		double parentcategory= 0;
 		
 		for(int i = 0 ;i<listLong.size();i++)
 		{
-			EntropyVal = calculateAllEntropy(listLong.get(i).getAttributeFigure());
+			EntropyVal = calculateAllEntropy(listLong.get(i));
 			
 			parentcategory = listLong.get(i).getAttributeParentFigure(); 	
 			
@@ -316,7 +395,7 @@ public class id3Main {
 
 	    double gain = allEntropy - allPlus;
 	    
-	    System.out.println(String.format("%1$s,信息增益为%2$f",infigure,gain));
+	    System.out.println(String.format("%1$s,信息增益为%2$f",attribute.getAttributeFigure()+attribute.getAttributeContent(),gain));
 	    
 	    double[] dgain = new double[2];
 	    dgain[0] = gain;
@@ -327,15 +406,27 @@ public class id3Main {
 	
 	
 	//样本集合的信息熵
-	private static double[] calculateAllEntropy(long infigure)
+	private static double[] calculateAllEntropy(id3Attribute attr)
 	{			                      
-        double[] outpercent = calculateAllProbability(infigure,"是");
-        double[] nooutpercent = calculateAllProbability(infigure,"否");
+        double[] outpercent = calculateAllProbability(attr.getAttributeFigure(),"是");
+        double[] nooutpercent = calculateAllProbability(attr.getAttributeFigure(),"否");
         double entropy = 0;
-        if(outpercent[0]!=0 && outpercent[0]!=0)
-        entropy = -outpercent[0]*Math.log(outpercent[0]) - nooutpercent[0]*Math.log(nooutpercent[0]);  //-5/14log(5/14) - 9/14log(9/14) = 0.940
-              
-        System.out.println(String.format("%1$s—总样本集合出去玩的概率是:%2$f，不出去玩的概率是:%3$f,，样本集合的信息熵:%4$f",infigure,outpercent[0],nooutpercent[0],entropy));
+        
+        double v1 = 0;
+        double v2= 0;
+        if(outpercent[0]!=0 ){
+        	v1 = -outpercent[0]*Math.log(outpercent[0]);
+        }
+        
+        if(nooutpercent[0]!=0 ){
+        	v2 = -nooutpercent[0]*Math.log(nooutpercent[0]);
+        }
+        
+       
+        	entropy = v1+v2;  //-5/14log(5/14) - 9/14log(9/14) = 0.940
+             
+        
+        System.out.println(String.format("%1$s—总样本集合出去玩的概率是:%2$f，不出去玩的概率是:%3$f,，样本集合的信息熵:%4$f",attr.getAttributeFigure()+attr.getAttributeContent(),outpercent[0],nooutpercent[0],entropy));
         
         double[] entropyArr = new double[2];
         entropyArr[0] = entropy;

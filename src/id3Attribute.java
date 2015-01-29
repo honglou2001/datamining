@@ -1,14 +1,21 @@
 ﻿
 public class id3Attribute {
-	long  attributeParentFigure ;
+	long  parentfigure ;
 	long  attributeFigure ;
    String attributeContent;
+   int  category ;
    
-   public double getAttributeParentFigure() {
-	return attributeParentFigure;
+   public int getCategory() {
+	return category;
+}
+public void setCategory(int category) {
+	this.category = category;
+}
+public long getAttributeParentFigure() {
+	return parentfigure;
 	}
 	public void setAttributeParentFigure(long  attributeParentFigure) {
-		this.attributeParentFigure = attributeParentFigure;
+		this.parentfigure = attributeParentFigure;
 	}
 	
    public String getAttributeContent() {

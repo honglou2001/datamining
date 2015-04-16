@@ -37,7 +37,10 @@ public class id3Main {
 		{"不开心1","不开心","下雨","拥堵","否"},
 		{"不开心1","一般","晴朗","通畅","是"},
 		{"不开心1","一般","下雨","通畅","否"},
-		{"不开心1","一般","阴暗","通畅","否"}
+		{"不开心1","一般","阴暗","通畅","否"},
+		{"一般1","一般","晴朗","通畅","否"},
+		{"一般1","一般","下雨","通畅","否"},
+		{"一般1","一般","阴暗","通畅","否"}
 		
 	};	
 	
@@ -110,6 +113,74 @@ public class id3Main {
 			calculateAttributeGain(attribute,dval1[0]);
 		}
 		
+		for(int i=1;i<=3;i++){
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[0]+"("+i+"信息熵)");
+			attribute.setAttributeFigure((long)Math.pow(2, i)|(long)Math.pow(2, 21));
+			attribute.setAttributeParentFigure(0);
+			
+			double[] dval1 = calculateAllEntropy(attribute);						
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[2]+"("+i+")"+"mothermood");
+			attribute.setAttributeFigure((long)Math.pow(2, i));		
+			attribute.setCategory(1);
+			attribute.setAttributeParentFigure((long)Math.pow(2, i)| (long)Math.pow(2, 0)| (long)Math.pow(2, 21)| (long)Math.pow(2, 20));
+			calculateAttributeGain(attribute,dval1[0]);
+			
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[2]+"("+i+")"+"traffic");
+			attribute.setAttributeFigure((long)Math.pow(2, i));		
+			attribute.setCategory(3);
+			attribute.setAttributeParentFigure((long)Math.pow(2, i)| (long)Math.pow(2, 0)| (long)Math.pow(2, 21)| (long)Math.pow(2, 20));
+			calculateAttributeGain(attribute,dval1[0]);
+		}
+		
+		for(int i=1;i<=3;i++){
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[1]+"("+i+"信息熵)");
+			attribute.setAttributeFigure((long)Math.pow(2, 10+i)|(long)Math.pow(2, 22));
+			attribute.setAttributeParentFigure(0);
+			
+			double[] dval1 = calculateAllEntropy(attribute);						
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[1]+"("+i+")"+"babymood");
+			attribute.setAttributeFigure((long)Math.pow(2, 10+i));		
+			attribute.setCategory(0);
+			attribute.setAttributeParentFigure((long)Math.pow(2, 10+i)| (long)Math.pow(2, 10)| (long)Math.pow(2, 22)| (long)Math.pow(2, 20));
+			calculateAttributeGain(attribute,dval1[0]);
+			
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[1]+"("+i+")"+"traffic");
+			attribute.setAttributeFigure((long)Math.pow(2, 10+i));		
+			attribute.setCategory(3);
+			attribute.setAttributeParentFigure((long)Math.pow(2, 10+i)| (long)Math.pow(2, 10)| (long)Math.pow(2, 22)| (long)Math.pow(2, 20));
+			calculateAttributeGain(attribute,dval1[0]);
+		}
+		
+		for(int i=1;i<=2;i++){
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[3]+"("+i+"信息熵)");
+			attribute.setAttributeFigure((long)Math.pow(2, 30+i)|(long)Math.pow(2, 21)|(long)Math.pow(2, 1));
+			attribute.setAttributeParentFigure(0);
+			
+			double[] dval1 = calculateAllEntropy(attribute);						
+			
+			attribute =new id3Attribute();
+			attribute.setAttributeContent(categories[2]+"("+i+")"+"mothermood");
+			attribute.setAttributeFigure((long)Math.pow(2, 30+i));		
+			attribute.setCategory(1);
+			attribute.setAttributeParentFigure((long)Math.pow(2, i)| (long)Math.pow(2, 0)| (long)Math.pow(2, 21)| (long)Math.pow(2, 20)| (long)Math.pow(2, 31)| (long)Math.pow(2, 30));
+			calculateAttributeGain(attribute,dval1[0]);
+			
+		}
+	
 		
 //		attribute =new id3Attribute();
 //		attribute.setAttributeContent(categories[2]+"晴朗111");
